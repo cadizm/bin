@@ -1,0 +1,4 @@
+#!/bin/bash
+
+stty erase ^H
+stty kill ^U

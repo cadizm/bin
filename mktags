@@ -1,0 +1,4 @@
+#!/bin/bash
+
+ctags --verbose --recurse --extra=+fq
+mkid -v

@@ -1,0 +1,22 @@
+#!/bin/bash
+
+#
+# create a workspace for the day's crap
+#
+
+DATE=`date +%Y%m%d`
+WS=$HOME/ws/$DATE
+
+if [ -d $WS ]; then
+    echo "Workspace $WS already exists"
+    exit 0
+else
+    mkdir -p $WS
+    if [ -d $WS ]; then
+        echo "Created workspace $WS"
+        exit 0
+    else
+        echo "Error: couldn't create workspace $WS"
+        exit 1
+    fi
+fi
