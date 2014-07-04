@@ -1,0 +1,10 @@
+#!/bin/bash
+
+FOO=`ps -ef | grep 'ssh-agent \-l' | awk '{print $2}'`
+
+if [ -n "$FOO" ]; then
+    sudo kill -9 $FOO;
+    echo "Killing ps $FOO"
+else
+    echo "No ssh agent found"
+fi

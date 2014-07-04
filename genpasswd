@@ -1,0 +1,21 @@
+#!/usr/bin/env python
+
+import sys
+import os
+import string
+
+
+def genpasswd(n):
+    p = ''
+    while len(p) < n:
+        r = os.urandom(1)
+        if r in string.printable and not r.isspace():
+            p += r
+    return p
+
+
+if __name__ == '__main__':
+    if len(sys.argv) != 2:
+        print "Usage: {} <length>".format(sys.argv[0])
+        sys.exit()
+    print genpasswd(int(sys.argv[1]))

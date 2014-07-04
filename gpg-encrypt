@@ -1,0 +1,38 @@
+#!/bin/bash
+
+function usage()
+{
+    echo "${0}: <doc> <recipient>"
+}
+
+OS=`uname`
+if [ $OS = 'Darwin' ]; then
+    echo "Bad OS!"
+    exit 1
+fi
+
+if [[ -z ${1} || -z ${2} ]]; then
+    usage
+    exit 1
+fi
+
+if [ -d ${1} ]; then
+    echo "${1} is folder, tgz'ing"
+    DOC="${1}.tar.gz"
+    DOC=`echo ${DOC} | sed 's/\///g'`
+    tar cfz ${DOC} ${1}
+else
+    DOC=${1}
+    DOC=`echo ${DOC} | sed 's/\///g'`
+fi
+
+
+gpg --output "${DOC}.gpg" --recipient "${2}" --encrypt ${DOC}
+
+if [ $? -eq 0 ]; then
+    echo && echo "Encrypted to ${DOC}.gpg" && echo
+    rm -rf ${1}
+    rm -rf ${DOC}
+else
+    echo "Error: couldn't encrypt ${1}"
+fi

@@ -1,0 +1,39 @@
+#!/usr/bin/perl -w
+
+if (scalar(@ARGV) != 2)
+{
+    usage();
+    exit;
+}
+
+$start = ($ARGV[0] =~ m/(\d?\d:\d\d)[ap]m/)[0];
+$end = ($ARGV[1] =~ m/(\d?\d:\d\d)[ap]m/)[0];
+
+if (!defined($start) or !defined($end))
+{
+    usage();
+    exit;
+}
+
+# convert to minutes
+$start_tmp = (split /:/, $start)[0] * 60 + (split /:/, $start)[1];
+$end_tmp = (split /:/, $end)[0] * 60 + (split /:/, $end)[1];
+
+# add 12 for pm if necessary
+$start = $ARGV[0] =~ m/pm/ ? $start_tmp + 12 * 60 : $start_tmp;
+$end = $ARGV[1] =~ m/pm/ ? $end_tmp + 12 * 60 : $end_tmp;
+
+if ($start > $end)
+{
+    usage();
+    exit;
+}
+
+# calculate and convert back to hours
+$hours = ($end - $start) / 60;
+print $hours, "\n";
+
+sub usage
+{
+    print 'Usage: hours <\d?\d:\d\d[ap]m> <\d?\d:\d\d[ap]m>', "\n";
+}

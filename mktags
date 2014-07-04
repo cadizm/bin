@@ -2,3 +2,4 @@
 
 ctags --verbose --recurse --extra=+fq
 mkid -v
+~/bin/fixtags.py tags

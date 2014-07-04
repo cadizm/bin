@@ -1,0 +1,43 @@
+#!/bin/bash
+
+function usage()
+{
+    echo "${0}: <doc>"
+}
+
+OS=`uname`
+if [ $OS = 'Darwin' ]; then
+    echo "Bad OS!"
+    exit 1
+fi
+
+if [ -z ${1} ]; then
+    usage
+    exit 1
+fi
+
+if [ -z `echo ${1} | grep '\.gpg$'` ]; then
+    DOC=${1}.decrypted
+else
+    DOC=`echo ${1} | sed s/\.gpg$//`
+fi
+
+DOC=`echo ${DOC} | sed 's/\///g'`
+
+gpg --output ${DOC} --decrypt ${1}
+
+if [ $? -eq 0 ]; then
+    echo && echo "Decrypted to ${DOC}" && echo
+    rm -f ${1}
+    if [ ! -z `echo ${DOC} | grep '\.tar\.gz$'` ]; then
+        echo "${DOC} is tgz'ed, decompressing"
+        tar xfz ${DOC}
+        if [ $? -eq 0 ]; then
+            rm -rf ${DOC}
+        else
+            echo "Error: couldn't decompress ${DOC}"
+        fi
+    fi
+else
+    echo "Error: couldn't decrypt ${1}"
+fi
