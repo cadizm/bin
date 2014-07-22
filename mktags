@@ -1,5 +1,5 @@
 #!/bin/bash
 
-ctags --verbose --recurse --extra=+fq
+ctags --verbose --recurse --extra=+fq --exclude='*.min.js'
 mkid -v
 ~/bin/fixtags.py tags
