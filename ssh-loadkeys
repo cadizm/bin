@@ -1,0 +1,18 @@
+#!/bin/bash
+
+OS=`uname`
+if [[ "$OS" = "Darwin" ]]; then
+    LIBAETPKSS='/usr/local/lib/libaetpkss.dylib'
+elif [[ "$OS" = "Linux" ]]; then
+    LIBAETPKSS='/usr/lib/libaetpkss.so'
+fi
+
+AETPKSS=`ssh-add -l | grep $LIBAETPKSS | awk '{print $3}'`
+if [ -z "$AETPKSS" ]; then
+    if [[ "$OS" = "Linux" ]]; then
+        eval `ssh-agent`
+    fi
+    ssh-add -s $LIBAETPKSS
+fi
+
+echo && ssh-add -l
