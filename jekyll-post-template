@@ -1,0 +1,43 @@
+#!/usr/bin/perl -w
+
+use strict;
+
+if (scalar(@ARGV) < 1) {
+    my $usage = <<EOF;
+
+    Usage: $0 <title> <categories> [yyyy-mm-dd]
+
+    Examples:
+        $0 'hello world' 'foo bar'
+        $0 'hello world' 'foo bar' 1980-05-18
+
+EOF
+    die $usage;
+}
+
+my ($title, $categories, $date) = @ARGV;
+$date = `date '+%Y-%m-%d'` if !$date;
+
+if ($date !~ /^\d{4}-\d{2}-\d{2}$/) {
+    die "Invalid date format (yyyy-mm-dd required)\n";
+}
+
+my $long_date = `date`; chomp $long_date;
+my $template = <<EOF;
+---
+layout: post
+title: "$title"
+date: $long_date
+categories: $categories
+---
+
+EOF
+
+my $filename = lc("$date$title.md");
+$filename =~ s/\s+/-/g;
+
+open(local *FH, ">$filename") or
+die "Couldn't open $filename for write";
+print "$filename\n";
+print FH $template;
+close(FH);
