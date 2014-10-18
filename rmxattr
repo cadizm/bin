@@ -1,0 +1,10 @@
+#!/bin/bash
+
+for file in $*; do
+    if [[ -f $file ]]; then
+        for attr in $(xattr $file ); do
+            echo $attr
+            xattr -d $attr $file
+        done
+    fi
+done

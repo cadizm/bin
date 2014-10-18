@@ -5,17 +5,17 @@ use strict;
 if (scalar(@ARGV) < 1) {
     my $usage = <<EOF;
 
-    Usage: $0 <title> <categories> [yyyy-mm-dd]
+    Usage: $0 <title> [yyyy-mm-dd]
 
     Examples:
-        $0 'hello world' 'foo bar'
-        $0 'hello world' 'foo bar' 1980-05-18
+        $0 'hello world'
+        $0 'hello world' 1980-05-18
 
 EOF
     die $usage;
 }
 
-my ($title, $categories, $date) = @ARGV;
+my ($title, $date) = @ARGV;
 $date = `date '+%Y-%m-%d'` if !$date;
 
 if ($date !~ /^\d{4}-\d{2}-\d{2}$/) {
@@ -28,7 +28,6 @@ my $template = <<EOF;
 layout: post
 title: "$title"
 date: $long_date
-categories: $categories
 ---
 
 EOF

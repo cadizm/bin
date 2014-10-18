@@ -1,5 +1,11 @@
 #!/bin/bash
 
-ctags --verbose --recurse --extra=+fq --exclude='bootstrap*.js'
+ctags --verbose --recurse --extra=+fq \
+--exclude='angular*.js' \
+--exclude='bootstrap*.js' \
+--exclude='jquery*.js' \
+--exclude='underscore*.js' \
+--exclude='bower_components/*'
+
 mkid -v
 ~/bin/fixtags.py tags
