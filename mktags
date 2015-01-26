@@ -5,6 +5,8 @@ ctags --verbose --recurse --extra=+fq \
 --exclude='bootstrap*.js' \
 --exclude='jquery*.js' \
 --exclude='underscore*.js' \
+--exclude='d3*.js' \
+--exclude='vega*.js' \
 --exclude='bower_components/*'
 
 mkid -v
