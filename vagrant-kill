@@ -1,8 +1,6 @@
 #!/bin/bash
 
-#BOX_DIR=${HOME}/workspace/boxes
-
-if [[ -z "" ]]; then
+if [[ -z "$BOX_DIR" ]]; then
     echo "envvar BOX_DIR undefined, bailing"
     exit 1
 fi
