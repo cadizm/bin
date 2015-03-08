@@ -5,9 +5,9 @@ function usage()
     echo "${0}: <doc>"
 }
 
-OS=`uname`
-if [ $OS = 'Darwin' ]; then
-    echo "Bad OS!"
+GPG=`which gpg`
+if [ -z "$GPG" ]; then
+    echo "gpg binary not found"
     exit 1
 fi
 
@@ -24,7 +24,7 @@ fi
 
 DOC=`echo ${DOC} | sed 's/\///g'`
 
-gpg --output ${DOC} --decrypt ${1}
+$GPG --output ${DOC} --decrypt ${1}
 
 if [ $? -eq 0 ]; then
     echo && echo "Decrypted to ${DOC}" && echo

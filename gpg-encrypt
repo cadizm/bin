@@ -5,9 +5,9 @@ function usage()
     echo "${0}: <doc> <recipient>"
 }
 
-OS=`uname`
-if [ $OS = 'Darwin' ]; then
-    echo "Bad OS!"
+GPG=`which gpg`
+if [ -z "$GPG" ]; then
+    echo "gpg binary not found"
     exit 1
 fi
 
@@ -27,7 +27,7 @@ else
 fi
 
 
-gpg --output "${DOC}.gpg" --recipient "${2}" --encrypt ${DOC}
+$GPG --output "${DOC}.gpg" --recipient "${2}" --encrypt ${DOC}
 
 if [ $? -eq 0 ]; then
     echo && echo "Encrypted to ${DOC}.gpg" && echo
