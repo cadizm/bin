@@ -6,7 +6,7 @@
 #
 
 SCREEN_SESSION="SCREEN - `date`"
-SCREENS="l00k l00k runserver manage log db ucr l00k ws ws"
+SCREENS="l00k l00k runserver manage log db ucr l00k ws l00k"
 NUM=0
 
 # start in daemon mode
@@ -20,36 +20,46 @@ for SCREEN_NAME in $(echo "${SCREENS}" ); do
     # fix backspace/delete
     screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'. ~/bin/stty-keys\r'
     case "${NUM}" in
-        "0" | "1")
-            echo "l0st"
-            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'cd ~/workspace/src/trunk.git/\r'
+        "0")
+            echo "l00k"
+            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'cd ~/workspace/src/tc-osx/tcdc-main/\r'
+            ;;
+        "1")
+            echo "l00k"
+            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'cd ~/workspace/src/tc-osx/tcdc-main/main-website/\r'
             ;;
         "2")
-            echo "vagrant up"
-            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'cd ~/workspace/boxes/centos64-fcs-machine2\r'
-            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'vagrant up && ssh `cat ifeth1`\r'
-            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'. ~/bin/memcached-start.sh\r'
-            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'cd /usr/local/fonality\r'
+            echo "runserver"
+            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'cd ~/workspace/src/tc-osx/tcdc-main/\r'
+            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'python bin/runserver.py\r'
+            ;;
+        "3")
+            echo "manage"
+            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'cd ~/workspace/src/tc-osx/tcdc-main/main-website\r'
+            ;;
+        "4")
+            echo "log"
+            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'cd /var/log/truecar/\r'
+            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'tail -f mcadiz-debug.log\r'
             ;;
         "5")
-            echo "fcs"
-            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'ssh devbox5.lotsofclouds.fonality.com\r'
-            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'cd ~/workspace/src/sql/mysql.git\r'
-            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'mysql -u fonality -h dev-db.lotsofclouds.fonality.com fcs\r'
+            echo "db"
+            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'mkws\r'
+            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'cdws\r'
             ;;
-        "3" | "4" | "6" | "7")
-            echo "ssh ifeth1"
-            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'cd ~/workspace/boxes/centos64-fcs-machine2/\r'
-            if [[ "$1" = "now" ]]; then
-                screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'ssh `cat ifeth1`\r'
-            else
-                screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'sleep 99 && ssh `cat ifeth1`\r'
-            fi
-            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'cd /usr/local/fonality\r'
+        "6")
+            echo "ucr"
+            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'workon ucr\r'
+            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'cd ~/workspace/src/dealer-portal/ucr/\r'
+            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'python bin/runserver.py\r'
             ;;
-        "8" | "9" | "10")
-            echo "ssh devbox5"
-            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'ssh devbox5.lotsofclouds.fonality.com\r'
+        "7")
+            echo "l00k"
+            ;;
+        "8" | "9")
+            echo "ws"
+            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'mkws\r'
+            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'cdws\r'
             ;;
         *)
             echo "Bad screen ${NUM}?"

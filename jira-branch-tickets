@@ -1,0 +1,13 @@
+#!/bin/bash
+
+cd /Users/mcadiz/workspace/src/tc-osx/tcdc-main
+BRANCHES=`git branch`
+
+for BRANCH in $(echo $BRANCHES); do
+    if [[ -n `echo ${BRANCH} | grep 'feature/'` ]]; then
+        TICKET=`echo $BRANCH | sed 's/feature\///'`
+        URL='https://jira.truecarcorp.com/browse/'$TICKET
+        echo "Opening $URL" && open $URL
+        sleep 1
+    fi
+done
