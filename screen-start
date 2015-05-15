@@ -6,7 +6,7 @@
 #
 
 SCREEN_SESSION="SCREEN - `date`"
-SCREENS="l00k l00k runserver manage log db ucr l00k ws l00k"
+SCREENS="l00k l00k runserver manage log db ucr l00k ws l00k jira"
 NUM=0
 
 # start in daemon mode
@@ -39,8 +39,8 @@ for SCREEN_NAME in $(echo "${SCREENS}" ); do
             ;;
         "4")
             echo "log"
-            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'cd /var/log/truecar/\r'
-            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'tail -f mcadiz-debug.log\r'
+            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'cd /opt/truecar/var/log/\r'
+            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'tail -f tcdc.log\r'
             ;;
         "5")
             echo "db"
@@ -59,6 +59,11 @@ for SCREEN_NAME in $(echo "${SCREENS}" ); do
         "8" | "9")
             echo "ws"
             screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'mkws\r'
+            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'cdws\r'
+            ;;
+        "10")
+            echo "jira"
+            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'workon jira-cli\r'
             screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'cdws\r'
             ;;
         *)
