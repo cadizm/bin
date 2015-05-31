@@ -1,0 +1,27 @@
+#!/usr/bin/env python
+
+import sys, re
+
+
+def slugify(argv):
+    if len(argv) == 1:  # if quoted, join with -
+        s = re.sub(r'\s', '-', argv[0])
+    else:  # non-quoted
+        s = '-'.join(argv)
+
+    # replace all non-alphanumberic except dash
+    s = re.sub('[^a-zA-Z\d\-]', '', s)
+
+    # replace running dashes
+    s = re.sub(r'[\-]+', '-', s)
+
+    # strip leading/trailing dashes
+    return s.strip('-').lower()
+
+
+if __name__ == '__main__':
+    if sys.stdin:
+        argv = sys.stdin.readlines()
+    else:
+        argv = sys.argv[1:]
+    print slugify(argv)
