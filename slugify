@@ -1,16 +1,17 @@
 #!/usr/bin/env python
 
-import sys, re
+import os, sys, re
 
 
-def slugify(argv):
+def _slugify(argv):
+    "argv expected to of type `list'"
     if len(argv) == 1:  # if quoted, join with -
         s = re.sub(r'\s', '-', argv[0])
     else:  # non-quoted
         s = '-'.join(argv)
 
-    # replace all non-alphanumberic except dash
-    s = re.sub('[^a-zA-Z\d\-]', '', s)
+    # replace all non-alphanumberic except dash/dot
+    s = re.sub('[^a-zA-Z\d\-\.]', '', s)
 
     # replace running dashes
     s = re.sub(r'[\-]+', '-', s)
@@ -19,9 +20,31 @@ def slugify(argv):
     return s.strip('-').lower()
 
 
-if __name__ == '__main__':
-    if sys.stdin:
-        argv = sys.stdin.readlines()
+def slugify(argv, rename=False):
+    if rename:
+        for v in argv:
+            s = _slugify([v])
+            os.rename(v, s)
+        return ''
     else:
+        return _slugify(argv)
+
+
+if __name__ == '__main__':
+    # read args
+    if os.isatty(file.fileno(sys.stdin)):
         argv = sys.argv[1:]
-    print slugify(argv)
+    # read piped data
+    else:
+        argv = sys.stdin.readlines()
+
+    argv = [s.strip() for s in argv if s.strip()]
+
+    rename = False
+    for f in argv:
+        if not os.path.isfile(f.strip()):
+            break
+    else:
+        rename = True
+
+    print slugify(argv, rename=rename)
