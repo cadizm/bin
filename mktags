@@ -5,7 +5,7 @@ ctags --verbose --recurse --extra=+fq \
 --exclude='www/bower_components/*' \
 --exclude='static/*' \
 --exclude='www/static/*' \
---exclude='assets/*' \
+--exclude='assets/bower_components/*' \
 --exclude='node_modules/*' \
 
 
