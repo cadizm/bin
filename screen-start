@@ -77,7 +77,7 @@ for SCREEN_NAME in $(echo "${SCREENS}" ); do
             echo "npm"
             screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'workon ucr\r'
             screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'cd ~/workspace/src/used-car/used/frontend\r'
-            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'npm start\r'
+            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'npm install && npm start\r'
             ;;
         *)
             echo "Bad screen ${NUM}?"
