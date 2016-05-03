@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+SRC_DIR=/Volumes/32JIGGABYTE/DCIM
+WORK_DIR=/Users/mcadiz/Desktop/timelapse/var
+
+OUTFILE="${WORK_DIR}/timelapse.mp4"
+
+if [[ ! -d "${SRC_DIR}" ]]; then
+    echo "Error: SRC_DIR undefined"
+    exit 1
+elif [[ ! -d "${WORK_DIR}" ]]; then
+    echo "Error: WORK_DIR undefined"
+    exit 1
+elif [[ -f "${OUTFILE}" ]]; then
+    echo "Error: ${OUTFILE} already exists"
+    exit 1
+fi
+
+echo "Moving .jpg's to ${WORK_DIR}"
+find $SRC_DIR -type f -iname '*.jpg' | xargs -I {} mv {} $WORK_DIR
+echo "Done."
+
+pushd $WORK_DIR
+ffmpeg -framerate 30 -i '%*.JPG' -q:v 2 -r 30 -pix_fmt yuv420p $OUTFILE
+popd
