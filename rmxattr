@@ -2,9 +2,9 @@
 
 for file in $*; do
     if [[ -f $file ]]; then
-        for attr in $(xattr $file ); do
+        for attr in $(xattr-2.7 $file ); do
             echo $attr
-            xattr -d $attr $file
+            xattr-2.7 -d $attr $file
         done
     fi
 done

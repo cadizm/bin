@@ -6,7 +6,7 @@
 #
 
 SCREEN_SESSION="SCREEN - `date`"
-SCREENS="l00k l00k runserver manage log db ucr ucr used used used"
+SCREENS="l00k l00k runserver manage log db ucr ucr used used used redis-server"
 NUM=0
 
 # start in daemon mode
@@ -54,13 +54,13 @@ for SCREEN_NAME in $(echo "${SCREENS}" ); do
         "6")
             echo "ucr"
             screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'workon ucr\r'
-            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'cd ~/workspace/src/dealer-portal/ucr/\r'
+            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'cd ~/workspace/src/ucr/\r'
             screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'python bin/runserver.py\r'
             ;;
         "7")
             echo "ucr"
             screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'workon ucr\r'
-            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'cd ~/workspace/src/dealer-portal/ucr/\r'
+            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'cd ~/workspace/src/ucr/\r'
             ;;
         "8")
             echo "used"
@@ -78,6 +78,10 @@ for SCREEN_NAME in $(echo "${SCREENS}" ); do
             screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'workon used\r'
             screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'cd ~/workspace/src/used-car/used/frontend\r'
             screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'npm install && npm start\r'
+            ;;
+        "11")
+            echo "redis-server"
+            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'redis-server\r'
             ;;
         *)
             echo "Bad screen ${NUM}?"
