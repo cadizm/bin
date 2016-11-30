@@ -1,0 +1,82 @@
+#!/bin/bash
+
+#
+# Tue Nov 29 18:09:58 PST 2016
+# tweaked version http://dev-tricks.net/automating-gnu-screen-startup
+#
+
+SCREEN_SESSION="SCREEN - `date`"
+SCREENS="l00k l00k runserver manage log dbconsole l00k l00k l00k l00k sidekiq"
+NUM=0
+
+# start in daemon mode
+screen -dmS "$SCREEN_SESSION"
+
+for SCREEN_NAME in $(echo "${SCREENS}" ); do
+    # create new window
+    screen -S "${SCREEN_SESSION}" -p {$NUM} -X screen
+    # name new window
+    screen -S "${SCREEN_SESSION}" -p ${NUM} -X title ${SCREEN_NAME}
+    # fix backspace/delete
+    screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'. ~/bin/stty-keys\r'
+    case "${NUM}" in
+        "0")
+            echo ${SCREEN_NAME}
+            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'cd ~/workspace/src/abp-backend/\r'
+            ;;
+        "1")
+            echo ${SCREEN_NAME}
+            echo "l00k"
+            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'cd ~/workspace/src/abp-backend/\r'
+            ;;
+        "2")
+            echo ${SCREEN_NAME}
+            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'cd ~/workspace/src/abp-backend/\r'
+            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'./bin/rails s\r'
+            ;;
+        "3")
+            echo ${SCREEN_NAME}
+            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'cd ~/workspace/src/abp-backend/\r'
+            ;;
+        "4")
+            echo ${SCREEN_NAME}
+            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'cd ~/workspace/src/abp-backend/\r'
+            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'tail -f log/development.log\r'
+            ;;
+        "5")
+            echo ${SCREEN_NAME}
+            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'cd ~/workspace/src/abp-backend/\r'
+            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'./bin/rails dbconsole\r'
+            ;;
+        "6")
+            echo ${SCREEN_NAME}
+            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'cd ~/workspace/src/abp-backend/\r'
+            ;;
+        "7")
+            echo ${SCREEN_NAME}
+            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'cd ~/workspace/src/abp-backend/\r'
+            ;;
+        "8")
+            echo ${SCREEN_NAME}
+            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'cd ~/workspace/src/abp-backend/\r'
+            ;;
+        "9")
+            echo ${SCREEN_NAME}
+            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'cd ~/workspace/src/abp-backend/\r'
+            ;;
+        "10")
+            echo ${SCREEN_NAME}
+            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'cd ~/workspace/src/abp-backend/\r'
+            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'foreman start worker\r'
+            ;;
+        *)
+            echo "Bad screen ${NUM}?"
+            ;;
+    esac
+    NUM=$((NUM + 1))
+done
+
+# kill initial window (i.e. only keep explicitly created)
+screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'exit\r'
+
+echo "Now join screen session ${SCREEN_SESSION}"
