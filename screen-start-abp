@@ -6,7 +6,7 @@
 #
 
 SCREEN_SESSION="SCREEN - `date`"
-SCREENS="l00k l00k runserver manage log dbconsole l00k l00k l00k l00k sidekiq"
+SCREENS="l00k l00k runserver manage log console l00k l00k l00k l00k sidekiq"
 NUM=0
 
 # start in daemon mode
@@ -46,7 +46,7 @@ for SCREEN_NAME in $(echo "${SCREENS}" ); do
         "5")
             echo ${SCREEN_NAME}
             screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'cd ~/workspace/src/abp-backend/\r'
-            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'./bin/rails dbconsole\r'
+            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'./bin/rails console\r'
             ;;
         "6")
             echo ${SCREEN_NAME}
