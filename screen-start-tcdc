@@ -55,7 +55,7 @@ for SCREEN_NAME in $(echo "${SCREENS}" ); do
             echo "ucr"
             screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'workon ucr\r'
             screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'cd ~/workspace/src/ucr/\r'
-            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'python bin/runserver.py\r'
+#            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'python bin/runserver.py\r'
             ;;
         "7")
             echo "ucr"
@@ -71,13 +71,13 @@ for SCREEN_NAME in $(echo "${SCREENS}" ); do
             echo "used"
             screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'workon used\r'
             screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'cd ~/workspace/src/used-car/\r'
-            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'python bin/runserver.py\r'
+#            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'python bin/runserver.py\r'
             ;;
         "10")
             echo "npm"
             screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'workon used\r'
             screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'cd ~/workspace/src/used-car/used/frontend\r'
-            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'npm install && npm start\r'
+#            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'npm install && npm start\r'
             ;;
         "11")
             echo "redis-server"
@@ -92,5 +92,5 @@ done
 
 # kill initial window (i.e. only keep explicitly created)
 screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'exit\r'
-
-echo "Now join screen session ${SCREEN_SESSION}"
+echo "Now joining screen session ${SCREEN_SESSION}"
+screen -x "${SCREEN_SESSION}"

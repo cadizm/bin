@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-SRC_DIR=/Volumes/32JIGGABYTE/DCIM
+DEFAULT_SRC_DIR=/Volumes/32JIGS/DCIM
+SRC_DIR=${1:-$DEFAULT_SRC_DIR}
 WORK_DIR=/Users/mcadiz/Desktop/timelapse/var
 
 OUTFILE="${WORK_DIR}/timelapse.mp4"
@@ -21,5 +22,7 @@ find $SRC_DIR -type f -iname '*.jpg' | xargs -I {} mv {} $WORK_DIR
 echo "Done."
 
 pushd $WORK_DIR
+#ffmpeg -framerate 60 -i '%*.JPG' -q:v 2 -r 30 -pix_fmt yuv420p $OUTFILE
 ffmpeg -framerate 30 -i '%*.JPG' -q:v 2 -r 30 -pix_fmt yuv420p $OUTFILE
+#ffmpeg -framerate 15 -i '%*.JPG' -q:v 2 -r 30 -pix_fmt yuv420p $OUTFILE
 popd

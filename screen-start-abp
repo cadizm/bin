@@ -78,5 +78,5 @@ done
 
 # kill initial window (i.e. only keep explicitly created)
 screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'exit\r'
-
-echo "Now join screen session ${SCREEN_SESSION}"
+echo "Now joining screen session ${SCREEN_SESSION}"
+screen -x "${SCREEN_SESSION}"
