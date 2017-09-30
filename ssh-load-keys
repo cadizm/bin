@@ -1,3 +1,5 @@
+#!/bin/bash
 
+# Usage: . `which ssh-load-keys`
 pkill ssh-agent && pkill gpg-agent && eval $(gpg-agent --daemon --enable-ssh-support  --log-file ~/.gnupg/gpg-agent.log)
 ssh-add -L
