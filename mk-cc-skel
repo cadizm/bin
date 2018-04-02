@@ -1,0 +1,25 @@
+#!/bin/bash
+
+SKEL_DIR=${HOME}/workspace/src/leetcode/cc-skel
+BASE_DIR=$(pwd)
+
+if [[ ! -d ${SKEL_DIR} ]]; then
+    echo "${SKEL_DIR} does not exist"
+    exit 1
+fi
+
+
+if [[ $# -ne 1 ]]; then
+    echo "Usage: $0 <NAME>"
+    exit 1
+fi
+
+NAME=${1}
+
+cp -R ${SKEL_DIR} ${BASE_DIR}/${NAME} && cd ${BASE_DIR}/${NAME}
+
+for file in $(ls skel* ); do
+    sed -i "s/skel/${NAME}/g" ${file}
+    sed -i "s/SKEL/$(echo ${NAME} | awk '{print toupper($0)}')/g" ${file}
+    mv ${file} $(echo ${file} | sed s/skel/${NAME}/);
+done
