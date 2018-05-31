@@ -6,7 +6,7 @@
 #
 
 SCREEN_SESSION="SCREEN - `date`"
-SCREENS="l00k l00k runserver manage log console l00k l00k l00k l00k sidekiq"
+SCREENS="l00k l00k runserver manage log console l00k l00k l00k l00k"
 NUM=0
 
 # start in daemon mode
@@ -32,11 +32,12 @@ for SCREEN_NAME in $(echo "${SCREENS}" ); do
         "2")
             echo ${SCREEN_NAME}
             screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'cd ~/workspace/src/abp-backend/\r'
-            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'./bin/rails s\r'
+            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'docker-compose run --rm --service-ports abp\r'
             ;;
         "3")
             echo ${SCREEN_NAME}
             screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'cd ~/workspace/src/abp-backend/\r'
+            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'docker-compose run --rm abp /bin/bash\r'
             ;;
         "4")
             echo ${SCREEN_NAME}
@@ -46,7 +47,7 @@ for SCREEN_NAME in $(echo "${SCREENS}" ); do
         "5")
             echo ${SCREEN_NAME}
             screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'cd ~/workspace/src/abp-backend/\r'
-            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'./bin/rails console\r'
+            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'docker-compose run --rm abp rails c\r'
             ;;
         "6")
             echo ${SCREEN_NAME}
@@ -63,11 +64,6 @@ for SCREEN_NAME in $(echo "${SCREENS}" ); do
         "9")
             echo ${SCREEN_NAME}
             screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'cd ~/workspace/src/abp-backend/\r'
-            ;;
-        "10")
-            echo ${SCREEN_NAME}
-            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'cd ~/workspace/src/abp-backend/\r'
-            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'foreman start worker\r'
             ;;
         *)
             echo "Bad screen ${NUM}?"
