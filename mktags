@@ -1,14 +1,7 @@
 #!/bin/bash
 
 ctags --verbose --recurse --extra=+fq \
---exclude='bower_components/*' \
---exclude='www/bower_components/*' \
---exclude='static/*' \
---exclude='www/static/*' \
---exclude='assets/bower_components/*' \
---exclude='node_modules/*' \
---exclude='*/.eggs/*' \
-
+--exclude='*/.eggs/*'
 
 mkid -v
 ~/bin/fixtags.py tags
