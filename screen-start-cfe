@@ -32,7 +32,6 @@ for SCREEN_NAME in $(echo "${SCREENS}" ); do
             echo ${SCREEN_NAME}
             screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'cd ~/workspace/src/abp-frontend/\r'
             screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'PARTNERS=* gluestick start-server -D | tee server.log\r'
-            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'PARTNERS=* gluestick start-server | tee server.log\\r'
             ;;
         "3")
             echo ${SCREEN_NAME}
