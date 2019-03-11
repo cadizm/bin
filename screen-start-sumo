@@ -6,7 +6,7 @@
 #
 
 SCREEN_SESSION="SCREEN - `date`"
-SCREENS="l00k l00k runserver manage log console l00k l00k l00k l00k"
+SCREENS="l00k l00k sumo manage log console l00k l00k l00k l00k"
 NUM=0
 
 # start in daemon mode
@@ -22,48 +22,48 @@ for SCREEN_NAME in $(echo "${SCREENS}" ); do
     case "${NUM}" in
         "0")
             echo ${SCREEN_NAME}
-            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'cd ~/workspace/src/abp-backend/\r'
+            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'cd ~/workspace/src/sumoforce/\r'
             ;;
         "1")
             echo ${SCREEN_NAME}
             echo "l00k"
-            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'cd ~/workspace/src/abp-backend/\r'
+            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'cd ~/workspace/src/sumoforce/\r'
             ;;
         "2")
             echo ${SCREEN_NAME}
-            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'cd ~/workspace/src/abp-backend/\r'
-            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'docker-compose run --rm --service-ports --use-aliases abp\r'
+            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'cd ~/workspace/src/sumoforce/\r'
+            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'docker-compose up\r'
             ;;
         "3")
             echo ${SCREEN_NAME}
-            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'cd ~/workspace/src/abp-backend/\r'
-            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'docker-compose run --rm abp /bin/bash\r'
+            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'cd ~/workspace/src/sumoforce/\r'
+            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'docker-compose run --rm sumo /bin/bash\r'
             ;;
         "4")
             echo ${SCREEN_NAME}
-            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'cd ~/workspace/src/abp-backend/\r'
+            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'cd ~/workspace/src/sumoforce/\r'
             screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'tail -f log/development.log\r'
             ;;
         "5")
             echo ${SCREEN_NAME}
-            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'cd ~/workspace/src/abp-backend/\r'
-            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'docker-compose run --rm abp rails c\r'
+            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'cd ~/workspace/src/sumoforce/\r'
+            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'docker-compose run --rm sumo rails c\r'
             ;;
         "6")
             echo ${SCREEN_NAME}
-            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'cd ~/workspace/src/abp-backend/\r'
+            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'cd ~/workspace/src/sumoforce/\r'
             ;;
         "7")
             echo ${SCREEN_NAME}
-            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'cd ~/workspace/src/abp-backend/\r'
+            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'cd ~/workspace/src/sumoforce/\r'
             ;;
         "8")
             echo ${SCREEN_NAME}
-            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'cd ~/workspace/src/abp-backend/\r'
+            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'cd ~/workspace/src/sumoforce/\r'
             ;;
         "9")
             echo ${SCREEN_NAME}
-            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'cd ~/workspace/src/abp-backend/\r'
+            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'cd ~/workspace/src/sumoforce/\r'
             ;;
         *)
             echo "Bad screen ${NUM}?"
