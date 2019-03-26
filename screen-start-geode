@@ -51,7 +51,7 @@ for SCREEN_NAME in $(echo "${SCREENS}" ); do
             ;;
         "6")
             echo ${SCREEN_NAME}
-            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'cd ~/workspace/src/geode/\r'
+            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'cd ~/workspace/src/geode/frontend/\r'
             screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'gluestick start\r'
             ;;
         "7")
