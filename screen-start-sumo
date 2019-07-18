@@ -32,12 +32,12 @@ for SCREEN_NAME in $(echo "${SCREENS}" ); do
         "2")
             echo ${SCREEN_NAME}
             screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'cd ~/workspace/src/sumoforce/\r'
-            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'docker-compose up\r'
+            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'docker-compose build && docker-compose up\r'
             ;;
         "3")
             echo ${SCREEN_NAME}
             screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'cd ~/workspace/src/sumoforce/\r'
-            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'docker-compose run --rm sumo /bin/bash\r'
+            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'# docker-compose run --rm sumo /bin/bash\r'
             ;;
         "4")
             echo ${SCREEN_NAME}
@@ -47,7 +47,7 @@ for SCREEN_NAME in $(echo "${SCREENS}" ); do
         "5")
             echo ${SCREEN_NAME}
             screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'cd ~/workspace/src/sumoforce/\r'
-            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'docker-compose run --rm sumo rails c\r'
+            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'# docker-compose run --rm sumo rails c\r'
             ;;
         "6")
             echo ${SCREEN_NAME}

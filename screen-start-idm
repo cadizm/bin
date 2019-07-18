@@ -22,48 +22,48 @@ for SCREEN_NAME in $(echo "${SCREENS}" ); do
     case "${NUM}" in
         "0")
             echo ${SCREEN_NAME}
-            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'cd ~/workspace/src/armatron/\r'
+            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'cd ~/workspace/src/idm-backend/\r'
             ;;
         "1")
             echo ${SCREEN_NAME}
             echo "l00k"
-            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'cd ~/workspace/src/armatron/\r'
+            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'cd ~/workspace/src/idm-backend/\r'
             ;;
         "2")
             echo ${SCREEN_NAME}
-            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'cd ~/workspace/src/armatron/\r'
+            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'cd ~/workspace/src/idm-backend/\r'
             screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'docker-compose build && docker-compose run --rm --service-ports --use-aliases app\r'
             ;;
         "3")
             echo ${SCREEN_NAME}
-            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'cd ~/workspace/src/armatron/\r'
+            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'cd ~/workspace/src/idm-backend/\r'
             screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'# docker-compose run --rm app /bin/bash\r'
             ;;
         "4")
             echo ${SCREEN_NAME}
-            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'cd ~/workspace/src/armatron/\r'
+            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'cd ~/workspace/src/idm-backend/\r'
             screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'tail -f log/development.log\r'
             ;;
         "5")
             echo ${SCREEN_NAME}
-            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'cd ~/workspace/src/armatron/\r'
+            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'cd ~/workspace/src/idm-backend/\r'
             screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'# docker-compose run --rm app rails c\r'
             ;;
         "6")
             echo ${SCREEN_NAME}
-            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'cd ~/workspace/src/armatron/\r'
+            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'cd ~/workspace/src/idm-backend/\r'
             ;;
         "7")
             echo ${SCREEN_NAME}
-            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'cd ~/workspace/src/armatron/\r'
+            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'cd ~/workspace/src/idm-backend/\r'
             ;;
         "8")
             echo ${SCREEN_NAME}
-            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'cd ~/workspace/src/armatron/\r'
+            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'cd ~/workspace/src/idm-backend/\r'
             ;;
         "9")
             echo ${SCREEN_NAME}
-            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'cd ~/workspace/src/armatron/\r'
+            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'cd ~/workspace/src/idm-backend/\r'
             ;;
         *)
             echo "Bad screen ${NUM}?"
