@@ -1,0 +1,1 @@
+psql --host=walder1.cbzklb9jkhje.us-west-2.rds.amazonaws.com --username=mcadiz --dbname=walder

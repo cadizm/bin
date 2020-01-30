@@ -32,7 +32,7 @@ for SCREEN_NAME in $(echo "${SCREENS}" ); do
         "2")
             echo ${SCREEN_NAME}
             screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'cd ~/workspace/src/geode/\r'
-            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'docker-compose build && docker-compose run --rm --service-ports --use-aliases app\r'
+            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'# docker-compose build && docker-compose run --rm --service-ports --use-aliases app\r'
             ;;
         "3")
             echo ${SCREEN_NAME}

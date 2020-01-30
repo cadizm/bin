@@ -1,0 +1,1 @@
+psql --host=walder-replica1.cmu6uoin446h.us-west-2.rds.amazonaws.com --username=mcadiz --dbname=postgres

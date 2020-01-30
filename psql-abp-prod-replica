@@ -1,0 +1,1 @@
+psql --host=abp-backend-db-replica-etl.prod.pod.tc --username=mcadiz --dbname=abp_backend_production

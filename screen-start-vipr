@@ -32,7 +32,7 @@ for SCREEN_NAME in $(echo "${SCREENS}" ); do
         "2")
             echo ${SCREEN_NAME}
             screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'cd ~/workspace/src/vipr/\r'
-            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'docker-compose build && docker-compose run --rm --service-ports --use-aliases vipr\r'
+            screen -S "${SCREEN_SESSION}" -p ${NUM} -X stuff $'# docker-compose build && docker-compose run --rm --service-ports --use-aliases vipr\r'
             ;;
         "3")
             echo ${SCREEN_NAME}
