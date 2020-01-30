@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+REMOTE=origin
+
+REPO=$(git config --local --get remote.${REMOTE}.url)
+REPO=${REPO/:/\/}
+REPO=${REPO/git@/"https://"}
+REPO=${REPO%\.git}
+
+BRANCH=$(git symbolic-ref HEAD --short)
+
+open -a "Google Chrome" "${REPO}/compare/${BRANCH}?expand=1"
