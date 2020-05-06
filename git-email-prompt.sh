@@ -3,7 +3,8 @@
 # https://depressiverobot.com/2015/01/05/git-email.html
 # https://gist.githubusercontent.com/depressiveRobot/09e40fbdaa7b09972439/raw/1d3e1004d28c45f1c19301c97fbd6cb9d9d02bc2/git-email-prompt.sh
 
-MAILS=(mike@cadizm.com michael.cadiz@gmail.com michael.cadiz@hulu.com)
+MAILS=(${EMAIL_ADDRESS_LIST})
+
 
 # prompt for email
 echo
