@@ -26,3 +26,8 @@ function git() {
     return $?
   fi
 }
+
+function ls() {
+  export WS="${HOME}/ws/$(date '+%Y%m%d')"
+  /bin/ls -F $@  # full-path to avoid recursion
+}
