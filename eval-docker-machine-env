@@ -1,8 +1,0 @@
-#!/bin/sh
-
-if [ $# -eq 1 ]; then
-    MACHINE="$(docker-machine ls $1 | grep 'Running' | awk '{print $1}')"
-    if [ -n ${MACHINE} ]; then
-        docker-machine env ${MACHINE}
-    fi
-fi
