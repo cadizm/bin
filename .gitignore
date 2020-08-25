@@ -2,3 +2,4 @@ tcdc-databuild
 psql-redshift
 mysql-fonzi
 devx
+aws-cli-assumerole.sh
