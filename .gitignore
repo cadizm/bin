@@ -3,3 +3,4 @@ psql-redshift
 mysql-fonzi
 devx
 aws-cli-assumerole.sh
+aws-login
