@@ -2,5 +2,7 @@ tcdc-databuild
 psql-redshift
 mysql-fonzi
 devx
+aws-assume-role-ff
 aws-cli-assumerole.sh
 aws-login
+aws-login-adplatform
