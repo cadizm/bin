@@ -32,3 +32,62 @@ function ls() {
   export WS="${HOME}/ws/$(date '+%Y%m%d')"
   /bin/ls -F $@  # full-path to avoid recursion
 }
+
+# --- "virtualenv" bindings
+
+function mkvirtualenv() {
+    if [[ $# -ne 1 ]]; then
+        echo "Usage: ${FUNCNAME[0]} <venv name>"
+        return;
+    fi
+
+    if [[ -z "${VENV_HOME}" ]]; then
+        echo "VENV_HOME undefined"
+        return;
+    fi
+
+    if [[ -z "$(which python3)" ]]; then
+        echo "python3 not found"
+        return;
+    fi
+
+    python3 -m venv ${VENV_HOME}/${1}
+    source ${VENV_HOME}/${1}/bin/activate
+}
+
+function lsvirtualenv() {
+    if [[ -z "${VENV_HOME}" ]]; then
+        echo "VENV_HOME undefined"
+        return;
+    fi
+
+    /bin/ls ${VENV_HOME}
+}
+
+function rmvirtualenv() {
+    if [[ $# -ne 1 ]]; then
+        echo "Usage: ${FUNCNAME[0]} <venv name>"
+        return;
+    fi
+
+    if [[ -z "${VENV_HOME}" ]]; then
+        echo "VENV_HOME undefined"
+        return;
+    fi
+
+    rm -rf ${VENV_HOME}/${1}
+}
+
+function workon() {
+    if [[ $# -ne 1 ]]; then
+        echo "Usage: ${FUNCNAME[0]} <venv name>"
+        return;
+    fi
+
+    if [[ -z "${VENV_HOME}" ]]; then
+        echo "VENV_HOME undefined"
+        return;
+    fi
+
+    source ${VENV_HOME}/${1}/bin/activate
+}
