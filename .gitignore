@@ -1,6 +1,8 @@
-aws-assume-role-ad-provider
+aws-assume-role-ad-qualifier
 aws-assume-role-ff
+aws-assume-role-hpf
 aws-assume-role-hva
+aws-assume-role-pc-api
 aws-cli-assumerole.sh
 aws-login
 aws-login-adplatform
