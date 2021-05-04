@@ -3,6 +3,7 @@ aws-assume-role-ff
 aws-assume-role-hpf
 aws-assume-role-hva
 aws-assume-role-pc-api
+aws-assume-role-pc-consumer
 aws-cli-assumerole.sh
 aws-login
 aws-login-adplatform
