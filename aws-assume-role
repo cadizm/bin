@@ -1,0 +1,40 @@
+#!/bin/bash
+
+# Execute this file by sourcing it
+#
+#   . aws-assume-role
+#
+
+ENV=$1
+case ${ENV} in
+  dev|qa)
+    ;;
+  *)
+    ENV=dev
+    ;;
+esac
+
+function assume_role {
+    if [[ -z "${ARN}" ]]; then
+        echo "Nothing to do, ARN not defined"
+        return
+    fi
+
+    echo "Assuming role ${ARN} in ${ENV}"
+
+    ROLE_SESSION_NAME="$(echo $ARN | awk -F '/' '{print $2}')-${ENV}"
+    JSON=$(aws --profile HULU_SSO sts assume-role --role-arn ${ARN} --role-session-name ${ROLE_SESSION_NAME})
+
+    AWS_ACCESS_KEY_ID=$(echo ${JSON} | jq -r '.Credentials.AccessKeyId')
+    AWS_SECRET_ACCESS_KEY=$(echo ${JSON} | jq -r '.Credentials.SecretAccessKey')
+    AWS_SESSION_TOKEN=$(echo ${JSON} | jq -r '.Credentials.SessionToken')
+
+    export "AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}"
+    export "AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}"
+    export "AWS_SESSION_TOKEN=${AWS_SESSION_TOKEN}"
+
+    KEYS="AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID};AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY};AWS_SESSION_TOKEN=${AWS_SESSION_TOKEN};"
+
+    printf $KEYS | pbcopy
+    printf "\n${KEYS}\n"
+}
