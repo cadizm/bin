@@ -1,5 +1,5 @@
 #!/bin/bash
 
-BASE_DIR=$HOME'/ws'
-WS_NAME=$BASE_DIR/`date '+%Y%m%d'`
-export WS=$WS_NAME
+# source this file, e.g.:
+#   . setws
+export WS="${HOME}/ws/$(date '+%Y%m%d')"
