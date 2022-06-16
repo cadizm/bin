@@ -53,6 +53,7 @@ function mkvirtualenv() {
 
     python3 -m venv ${VENV_HOME}/${1}
     source ${VENV_HOME}/${1}/bin/activate
+    python -m pip install --upgrade pip
 }
 
 function lsvirtualenv() {
