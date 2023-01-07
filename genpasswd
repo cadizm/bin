@@ -31,4 +31,4 @@ if __name__ == '__main__':
     else:
         corpus = [s for s in string.printable if not s.isspace()]
 
-    print(genpasswd(args.length, corpus))
+    print(genpasswd(args.length, corpus), end='')
