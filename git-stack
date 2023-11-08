@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+# The purpose of this script is to wrap git-stack and alias `next` and `prev`
+# to `down` and `up` respectively.
+#
+# This means that to get to "newer" branches we travel down the "stack", and
+# to get to older ones we travel up.
+#
+# This may be confusing to some since we typically think of pushing items onto
+# a stack, causing the oldest items to be at the bottom.
+#
+# In terms of git branching though, "older" branches are usually displayed
+# "higher" in the repository tree (or graph) and "newer" branches are branched
+# "below" and to the right of their parents.
+
+if [[ "$#" = "1" ]]; then
+  if [[ "$1" = "up" ]]; then
+    ARGS="prev"
+  elif [[ "$1" = "down" ]]; then
+    ARGS="next"
+  else
+    ARGS="$1"
+  fi
+else
+    ARGS="$@"
+fi
+
+$HOME/.cargo/bin/git-stack $ARGS
