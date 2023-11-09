@@ -18,6 +18,8 @@ if [[ "$#" = "1" ]]; then
     ARGS="prev"
   elif [[ "$1" = "down" ]]; then
     ARGS="next"
+  elif [[ "$1" = "push" ]]; then
+    ARGS="--push"
   else
     ARGS="$1"
   fi
