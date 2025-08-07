@@ -1,0 +1,18 @@
+#!/usr/bin/env python3
+
+import sys
+
+from datetime import datetime
+from zoneinfo import ZoneInfo
+
+
+def convert(s):
+    iso = datetime.fromisoformat(s)  # ISO 8601
+    return iso.astimezone(ZoneInfo("America/Los_Angeles"))
+
+if len(sys.argv) == 1:
+    s = ''.join(sys.stdin).strip()
+else:
+    s = sys.argv[1].strip()
+
+print(f'{s} -> {convert(s)}')

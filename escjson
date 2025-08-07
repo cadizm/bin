@@ -1,0 +1,18 @@
+#!/usr/bin/env python3
+
+import sys
+import json
+
+def escape_json(s):
+    try:
+        obj = json.loads(s)
+    except Exception as e:
+        print(f'Error: "{e}" parsing "{s}"')
+
+    return '"' + json.dumps(obj).replace('"', '\\\\\\"') + '"'
+
+
+if len(sys.argv) == 1:
+    print(escape_json(''.join(sys.stdin)))
+else:
+    print(escape_json(sys.argv[1]))
