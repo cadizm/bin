@@ -52,8 +52,10 @@ function mkvirtualenv() {
     fi
 
     # For Airflow
+    #python3 -m venv ${VENV_HOME}/${1}
     #/opt/homebrew/Cellar/python@3.10/3.10.17_1/bin/python3.10 -m venv ${VENV_HOME}/${1}
-    python3 -m venv ${VENV_HOME}/${1}
+    #/opt/homebrew/Cellar/python@3.12/3.12.12/bin/python3.12 -m venv ${VENV_HOME}/${1}
+    /opt/homebrew/Cellar/python@3.13/3.13.9/bin/python3.13 -m venv ${VENV_HOME}/${1}
     source ${VENV_HOME}/${1}/bin/activate
     python -m pip install --upgrade pip
 }
