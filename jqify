@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+# Run jq on all the JSON files in the current directory and save the pretty-preinted format to the file
+fd -e json -x sh -c "jq -M '.' '{}' | sponge '{}'"
